@@ -1,0 +1,29 @@
+env:
+    CIRRUS_CLONE_DEPTH: 1
+    CIRRUS_WORKING_DIR: "/tmp/work"
+
+task:
+    name: Build
+    timeout_in: 120m
+    container:
+      image: ubuntu:latest
+      cpu: 4
+      memory: 16
+    env_script:
+      - env
+    setup_script:
+      - apt install git
+      - git config --global user.name "RahulPalXDA"
+      - git config --global user.email "RahulPal.XDA@gmail.com"
+      - git clone --depth=1 https://github.com/akhilnarang/scripts.git scripts
+      - ./scripts/setup/android_build_env.sh
+      - rm -rf scripts
+    build_script:
+      - repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git -b twrp-12.1
+      - repo sync
+      - git clone --depth=1 https://github.com/TeamWin/android_device_xiaomi_ginkgo.git -b android-12.1 device/xiaomi/ginkgo
+    build_script:
+      - export ALLOW_MISSING_DEPENDENCIES=true
+      - . build/envsetup.sh
+      - lunch twrp_ginkgo-eng
+      - mka recoveryimage
