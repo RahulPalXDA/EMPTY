@@ -13,7 +13,7 @@ task:
       - env
     setup_script:
       - apt update
-      - apt install -y git sudo nano
+      - apt install -y git sudo nano ccache
       - git config --global user.name "RahulPalXDA"
       - git config --global user.email "RahulPal.XDA@gmail.com"
       - git clone --depth=1 https://github.com/akhilnarang/scripts.git scripts
@@ -25,6 +25,8 @@ task:
       - git clone --depth=1 https://github.com/GinkgoHub/twrp.git -b android-12.1 device/xiaomi/ginkgo
     build_script:
       - export ALLOW_MISSING_DEPENDENCIES=true
+      - export USE_CCACHE=1
+      - ccache -M 8G
       - . build/envsetup.sh
       - lunch twrp_ginkgo-eng
       - mka recoveryimage
