@@ -12,6 +12,7 @@ task:
     env_script:
       - env
     setup_script:
+      - apt update
       - apt install git
       - git config --global user.name "RahulPalXDA"
       - git config --global user.email "RahulPal.XDA@gmail.com"
