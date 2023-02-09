@@ -28,6 +28,6 @@ task:
       - . build/envsetup.sh
       - lunch twrp_ginkgo-eng
       - mka recoveryimage
-    build_script:
+    upload_script:
       - cd out/target/product/ginkgo/
       - curl -sL https://git.io/file-transfer | sh && ./transfer wet recovery.img
