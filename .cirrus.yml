@@ -22,9 +22,12 @@ task:
     sync_script:
       - repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git -b twrp-12.1
       - repo sync
-      - git clone --depth=1 https://github.com/TeamWin/android_device_xiaomi_ginkgo.git -b android-12.1 device/xiaomi/ginkgo
+      - git clone --depth=1 https://github.com/GinkgoHub/twrp.git -b android-12.1 device/xiaomi/ginkgo
     build_script:
       - export ALLOW_MISSING_DEPENDENCIES=true
       - . build/envsetup.sh
       - lunch twrp_ginkgo-eng
       - mka recoveryimage
+    build_script:
+      - cd out/target/product/ginkgo/
+      - curl -sL https://git.io/file-transfer | sh && ./transfer wet recovery.img
