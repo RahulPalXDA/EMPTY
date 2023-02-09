@@ -13,7 +13,7 @@ task:
       - env
     setup_script:
       - apt update
-      - apt install git
+      - apt install -y git
       - git config --global user.name "RahulPalXDA"
       - git config --global user.email "RahulPal.XDA@gmail.com"
       - git clone --depth=1 https://github.com/akhilnarang/scripts.git scripts
