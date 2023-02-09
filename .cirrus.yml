@@ -19,7 +19,7 @@ task:
       - git clone --depth=1 https://github.com/akhilnarang/scripts.git scripts
       - ./scripts/setup/android_build_env.sh
       - rm -rf scripts
-    build_script:
+    sync_script:
       - repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git -b twrp-12.1
       - repo sync
       - git clone --depth=1 https://github.com/TeamWin/android_device_xiaomi_ginkgo.git -b android-12.1 device/xiaomi/ginkgo
